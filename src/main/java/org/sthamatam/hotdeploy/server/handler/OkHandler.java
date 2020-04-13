@@ -1,4 +1,4 @@
-package org.sthamatam.server.handler;
+package org.sthamatam.hotdeploy.server.handler;
 
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
@@ -22,7 +22,8 @@ public class OkHandler extends AbstractHandler {
 
 	public void handle(String target, Request baseRequest,
 					   HttpServletRequest request,
-					   HttpServletResponse response) throws IOException, ServletException {
+					   HttpServletResponse response) {
+
 		LOG.info("Generic handler : {}", message);
 
 		response.setStatus(HttpServletResponse.SC_OK);

@@ -1,6 +1,6 @@
-package org.sthamatam.server.deploy;
+package org.sthamatam.hotdeploy.server.deploy;
 
-import org.sthamatam.server.ServerContext;
+import org.sthamatam.hotdeploy.server.RollingServer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class ZipTask extends JarTask {
 
 	protected void extractZip() throws FileNotFoundException, IOException {
 
-		String appsHome = ServerContext.getInstance().getAppsHome();
+		String appsHome = RollingServer.getInstance().getAppsHome();
 		ZipFile zip = new ZipFile(appsHome + zipName);
 
 		Enumeration entries = zip.entries();

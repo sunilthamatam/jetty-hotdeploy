@@ -65,7 +65,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>org.sthamatam.server.Main</mainClass>
+              <mainClass>org.sthamatam.hotdeploy.server.RollingServer</mainClass>
             </manifest>
           </archive>
         </configuration>

@@ -1,12 +1,12 @@
-package org.sthamatam.server.handler;
+package org.sthamatam.hotdeploy.server.handler;
 
 import org.eclipse.jetty.http.HttpMethod;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.sthamatam.server.deploy.JarTask;
-import org.sthamatam.server.deploy.Task;
-import org.sthamatam.server.deploy.WarTask;
-import org.sthamatam.server.deploy.ZipTask;
+import org.sthamatam.hotdeploy.server.deploy.JarTask;
+import org.sthamatam.hotdeploy.server.deploy.Task;
+import org.sthamatam.hotdeploy.server.deploy.WarTask;
+import org.sthamatam.hotdeploy.server.deploy.ZipTask;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +32,9 @@ public class DeployHandler extends AbstractHandler {
 
 			Task task = getTask(path, file);
 			try {
-				task.execute();
+				task.execute(file, path);
 				response.setStatus(HttpServletResponse.SC_OK);
-
-				// perform gc
-				System.gc();
-
+				
 			} catch (RuntimeException e) {
 				// TODO - add error logging
 				e.printStackTrace();

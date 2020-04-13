@@ -1,9 +1,9 @@
-package org.sthamatam.server.deploy;
+package org.sthamatam.hotdeploy.server.deploy;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.sthamatam.server.ServerContext;
+import org.sthamatam.hotdeploy.server.RollingServer;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class JarTask extends Task {
 			getHandlerCollection().addHandler(currentApp);
 			currentApp.start();
 
-			Map<String, Handler> appmap = ServerContext.getInstance().getAppMap();
+			Map<String, Handler> appmap = RollingServer.getInstance().getAppMap();
 			Handler oldApp = appmap.get(getContextRoot());
 			if (oldApp != null) {
 				getThreadPool().pause();
@@ -52,7 +52,7 @@ public class JarTask extends Task {
 		ServletContextHandler servletHandler = new ServletContextHandler();
 		servletHandler.setContextPath(getContextRoot());
 
-		jar = ServerContext.getInstance().getAppsHome() + jar;
+		jar = RollingServer.getInstance().getAppsHome() + jar;
 		try {
 
 			URL url = new File(jar).toURI().toURL();

@@ -1,9 +1,9 @@
-package org.sthamatam.server.deploy;
+package org.sthamatam.hotdeploy.server.deploy;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.sthamatam.server.ServerContext;
-import org.sthamatam.server.thread.PausableQueuedThreadPool;
+import org.sthamatam.hotdeploy.server.RollingServer;
+import org.sthamatam.hotdeploy.server.thread.PausableQueuedThreadPool;
 
 /**
  * @author sunilthamatam
@@ -17,7 +17,7 @@ public abstract class Task implements Runnable {
 	public Task(String pathToFile, String contextRoot) {
 		this.pathToFile = pathToFile;
 		this.contextRoot = contextRoot;
-		_server = ServerContext.getInstance().getServer();
+		_server = RollingServer.getInstance().getServer();
 	}
 
 

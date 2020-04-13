@@ -1,4 +1,4 @@
-package org.sthamatam.server.thread;
+package org.sthamatam.hotdeploy.server.thread;
 
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 

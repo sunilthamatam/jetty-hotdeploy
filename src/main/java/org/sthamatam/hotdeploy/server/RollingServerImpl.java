@@ -1,4 +1,4 @@
-package org.sthamatam.server;
+package org.sthamatam.hotdeploy.server;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author sunilthamatam
  */
-public class LocalServerContext extends ServerContext {
+public class RollingServerImpl extends RollingServer {
 
 	public static final String SERVER_APPS = "apps";
 
@@ -32,7 +32,8 @@ public class LocalServerContext extends ServerContext {
 	private String appsHome;
 
 
-	public LocalServerContext(Server server) {
+	RollingServerImpl(Server server) {
+
 		if (_instance != null) {
 			throw new IllegalStateException("Server context already created.");
 		}

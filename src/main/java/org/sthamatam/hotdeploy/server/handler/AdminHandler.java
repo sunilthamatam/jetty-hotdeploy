@@ -1,12 +1,12 @@
-package org.sthamatam.server.handler;
+package org.sthamatam.hotdeploy.server.handler;
 
 import org.eclipse.jetty.http.HttpMethod;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
-import org.sthamatam.server.ServerContext;
-import org.sthamatam.server.thread.PausableQueuedThreadPool;
+import org.sthamatam.hotdeploy.server.RollingServer;
+import org.sthamatam.hotdeploy.server.thread.PausableQueuedThreadPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +25,10 @@ public class AdminHandler extends AbstractHandler {
 	final static String URI_STATUS_RESUME = "resume";
 	final static String URI_STATUS_STOP = "stop";
 
-	public void handle(String target, Request baseRequest,
-					   HttpServletRequest request,
-					   HttpServletResponse response) throws IOException, ServletException {
+	public void handle(String target,
+                       Request baseRequest,
+                       HttpServletRequest request,
+                       HttpServletResponse response) throws IOException, ServletException {
 
 		baseRequest.setHandled(true);
 
@@ -38,7 +39,7 @@ public class AdminHandler extends AbstractHandler {
 			if (splits.length >= 3) {
 				if (URI_SERVER.equals(splits[1])) {
 
-					ServerContext context = ServerContext.getInstance();
+					RollingServer context = RollingServer.getInstance();
 					PausableQueuedThreadPool pool = (PausableQueuedThreadPool) context.getServer().getThreadPool();
 					switch (splits[2]) {
 

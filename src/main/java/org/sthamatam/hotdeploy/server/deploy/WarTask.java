@@ -1,8 +1,8 @@
-package org.sthamatam.server.deploy;
+package org.sthamatam.hotdeploy.server.deploy;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.sthamatam.server.ServerContext;
+import org.sthamatam.hotdeploy.server.RollingServer;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class WarTask extends Task {
 	public void execute(String pathToFile, String contextRoot) {
 
 		try {
-			ServerContext serverContext = ServerContext.getInstance();
+			RollingServer serverContext = RollingServer.getInstance();
 			WebAppContext war = new WebAppContext();
 			war.setContextPath(getContextRoot());
 			war.setWar(serverContext.getAppsHome() + getPathToFile());
@@ -27,7 +27,7 @@ public class WarTask extends Task {
 			war.setInitParameter("dirAllowed", "false");
 			war.start();
 
-			Map<String, Handler> appmap = ServerContext.getInstance().getAppMap();
+			Map<String, Handler> appmap = RollingServer.getInstance().getAppMap();
 			Handler oldApp = appmap.get(getContextRoot());
 			if (oldApp != null) {
 				getThreadPool().pause();

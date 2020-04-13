@@ -1,4 +1,4 @@
-package org.sthamatam.server.deploy;
+package org.sthamatam.hotdeploy.server.deploy;
 
 /**
  * Created by sunilthamatam on 9/26/17.
