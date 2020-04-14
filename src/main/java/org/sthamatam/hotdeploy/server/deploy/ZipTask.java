@@ -25,19 +25,18 @@ public class ZipTask extends JarTask {
 		zipName = zip;
 	}
 
-	@Override
-	public void execute() {
+	public void execute(String pathToFile, String context) {
 
 		try {
 
 			extractZip();
 
-			// derive jar name to be deploye
+			// derive jar name to be deployed
 			String partialName = zipName.substring(0, zipName.indexOf(".zip"));
 			String jarName = partialName + ".jar";
 
 			// complete jar deployment
-			super.execute();
+			super.execute(jarName, context);
 
 		} catch (Exception e) {
 			// TODO - error log - deployment failure

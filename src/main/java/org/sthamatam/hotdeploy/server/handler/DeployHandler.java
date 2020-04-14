@@ -21,20 +21,20 @@ public class DeployHandler extends AbstractHandler {
 	public void handle(String target,
 					   Request baseRequest,
 					   HttpServletRequest request,
-					   HttpServletResponse response) throws IOException, ServletException {
+					   HttpServletResponse response) {
 
 		baseRequest.setHandled(true);
 
 		String method = request.getMethod();
 		if (HttpMethod.POST.is(method)) {
-			String path = request.getParameter("context");
+			String context = request.getParameter("context");
 			String file = request.getParameter("file");
 
-			Task task = getTask(path, file);
+			Task task = getTask(file, context);
 			try {
-				task.execute(file, path);
+				task.execute(file, context);
 				response.setStatus(HttpServletResponse.SC_OK);
-				
+
 			} catch (RuntimeException e) {
 				// TODO - add error logging
 				e.printStackTrace();
@@ -43,12 +43,12 @@ public class DeployHandler extends AbstractHandler {
 		}
 	}
 
-	public Task getTask(String path, String file) {
+	public Task getTask(String file, String context) {
 
 		return file.endsWith(".war") ?
-					new WarTask(file, path) :
+					new WarTask(file, context) :
 					file.endsWith(".zip") ?
-							new ZipTask(file, path) :
-							new JarTask(file, path);
+							new ZipTask(file, context) :
+							new JarTask(file, context);
 	}
 }

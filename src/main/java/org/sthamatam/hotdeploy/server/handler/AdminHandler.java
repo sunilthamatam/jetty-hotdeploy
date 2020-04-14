@@ -28,7 +28,7 @@ public class AdminHandler extends AbstractHandler {
 	public void handle(String target,
                        Request baseRequest,
                        HttpServletRequest request,
-                       HttpServletResponse response) throws IOException, ServletException {
+                       HttpServletResponse response) {
 
 		baseRequest.setHandled(true);
 
